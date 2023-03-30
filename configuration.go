@@ -50,8 +50,8 @@ type APIKey struct {
 
 type Configuration struct {
 	BasePath      string            `json:"basePath,omitempty"`
-	Host          string            `json:"host,omitempty"`
-	Scheme        string            `json:"scheme,omitempty"`
+	Host          string            `json:"host,omitempty"`   // Host is "ip:port"
+	Scheme        string            `json:"scheme,omitempty"` // Scheme is http or https
 	DefaultHeader map[string]string `json:"defaultHeader,omitempty"`
 	UserAgent     string            `json:"userAgent,omitempty"`
 	HTTPClient    *http.Client

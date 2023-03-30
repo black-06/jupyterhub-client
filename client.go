@@ -201,7 +201,7 @@ func (c *APIClient) prepareRequest(
 		}
 		if len(fileBytes) > 0 && fileName != "" {
 			w.Boundary()
-			//_, fileNm := filepath.Split(fileName)
+			// _, fileNm := filepath.Split(fileName)
 			part, err := w.CreateFormFile("file", filepath.Base(fileName))
 			if err != nil {
 				return nil, err
@@ -243,6 +243,10 @@ func (c *APIClient) prepareRequest(
 		}
 	}
 
+	// Override request host
+	url.Host = c.cfg.Host
+	url.Scheme = c.cfg.Scheme
+
 	// Encode the parameters.
 	url.RawQuery = query.Encode()
 
@@ -263,11 +267,6 @@ func (c *APIClient) prepareRequest(
 			headers.Set(h, v)
 		}
 		localVarRequest.Header = headers
-	}
-
-	// Override request host, if applicable
-	if c.cfg.Host != "" {
-		localVarRequest.Host = c.cfg.Host
 	}
 
 	// Add the user agent to the request.
